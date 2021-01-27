@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="sub-total">1278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="final-total">1278</span></h5>
                      </div>
                   </div>
                </div>
@@ -88,6 +88,7 @@
       phoneAddedBtn.addEventListener('click', function () {
          const phoneTotalQuantity = quantityAdd('phone-quantity');
          const phonePrice = totalItemPrice('phone-price', phoneTotalQuantity);
+         const subAmount = subTotal('sub-total', phonePrice);       
       });
 
 
@@ -108,6 +109,15 @@
          document.getElementById(id).innerText = totalPrice;
          return totalPrice;
          }
+
+      // function for sub-total 
+      function subTotal(id, itemPrice){
+         const subAmount = document.getElementById(id).innerText;
+         const subAmountNum = parseFloat(subAmount);
+         const totalSubAmount = 59 + itemPrice;
+         document.getElementById(id).innerText = totalSubAmount;
+         return totalSubAmount;
+      }
    </script>
 </body>
 
