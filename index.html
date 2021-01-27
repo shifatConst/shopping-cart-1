@@ -25,7 +25,7 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="phone-mins-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="phone-quantity" type="text" class="form-control text-center" value="1">
                            <button id="phone-plus-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
@@ -82,21 +82,30 @@
 
       const phoneBasePrice = 1219;
       const caseBasePrice = 59;
+      const increase = 1;
 
       //phone quantity add button event handler
       const phoneAddedBtn = document.getElementById('phone-plus-btn');
       phoneAddedBtn.addEventListener('click', function () {
-         const phoneTotalQuantity = quantityAdd('phone-quantity');
+         const phoneTotalQuantity = quantity('phone-quantity', increase);
          const phonePrice = totalItemPrice('phone-price', phoneTotalQuantity);
          const subAmount = subTotal('sub-total', phonePrice);       
       });
 
+      //phone quantity minus button event handler
+      const phoneMinusBtn = document.getElementById('phone-mins-btn');
+      phoneMinusBtn.addEventListener('click', function () {
+         const phoneTotalQuantity = quantity('phone-quantity', (-1) * increase);
+         const phonePrice = totalItemPrice('phone-price', phoneTotalQuantity);
+         const subAmount = subTotal('sub-total', phonePrice);
+      });
+
 
       //function for quantity add
-      function quantityAdd(id) {
-         const addQuantity = document.getElementById(id).value;
-         const quantityNum = parseFloat(addQuantity);
-         const currentQuantity = quantityNum + 1;
+      function quantity(id, increase) {
+         const quantity = document.getElementById(id).value;
+         const quantityNum = parseFloat(quantity);
+         const currentQuantity = quantityNum + increase;
          document.getElementById(id).value = currentQuantity
          return currentQuantity;
       }
