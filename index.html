@@ -25,7 +25,7 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="phone-mins-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="phone-quantity" type="text" class="form-control text-center" value="1">
                            <button id="phone-plus-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="case-mins-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-quantity" type="text" class="form-control text-center" value="1">
+                           <button id="case-plus-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$ <span id="case-price">59</span> </h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -82,39 +82,72 @@
 
       const phoneBasePrice = 1219;
       const caseBasePrice = 59;
+      const increase = 1;
 
       //phone quantity add button event handler
       const phoneAddedBtn = document.getElementById('phone-plus-btn');
       phoneAddedBtn.addEventListener('click', function () {
-         const phoneTotalQuantity = quantityAdd('phone-quantity');
-         const phonePrice = totalItemPrice('phone-price', phoneTotalQuantity);
-         const subAmount = subTotal('sub-total', phonePrice);       
+         const phoneTotalQuantity = quantity('phone-quantity', increase);
+         const phonePrice = totalItemPrice('phone-price', phoneBasePrice , phoneTotalQuantity);
+         const subAmount = subTotalPlus('sub-total', 1219);  
       });
+
+      //phone quantity minus button event handler
+      const phoneMinusBtn = document.getElementById('phone-mins-btn');
+      phoneMinusBtn.addEventListener('click', function () {
+         const phoneTotalQuantity = quantity('phone-quantity', (-1) * increase);
+         const phonePrice = totalItemPrice('phone-price', phoneBasePrice, phoneTotalQuantity);
+         const subAmount = subTotalMinus('sub-total', 1219);
+      });
+
+      //case quantity add button event handler
+      const caseAddedBtn = document.getElementById('case-plus-btn');
+      caseAddedBtn.addEventListener('click', function () {
+         const caseTotalQuantity = quantity('case-quantity', increase);
+         const casePrice = totalItemPrice('case-price', caseBasePrice, caseTotalQuantity);
+         const subAmountCase = subTotalPlus('sub-total', 59);
+      });
+
+      //case quantity minus button event handler
+      const caseMinsButton = document.getElementById('case-mins-btn');
+      caseMinsButton.addEventListener('click', function(){
+         const caseTotalQuantity = quantity('case-quantity', (-1) * increase);
+         const casePrice = totalItemPrice('case-price', caseBasePrice, caseTotalQuantity);
+         const subAmountCase = subTotalMinus('sub-total', 59);
+      })
 
 
       //function for quantity add
-      function quantityAdd(id) {
-         const addQuantity = document.getElementById(id).value;
-         const quantityNum = parseFloat(addQuantity);
-         const currentQuantity = quantityNum + 1;
+      function quantity(id, increase) {
+         const quantity = document.getElementById(id).value;
+         const quantityNum = parseFloat(quantity);
+         const currentQuantity = quantityNum + increase;
          document.getElementById(id).value = currentQuantity
          return currentQuantity;
       }
 
       //function for total item price
-      function totalItemPrice(id, totalQuantity) {
+      function totalItemPrice(id, basePrice, totalQuantity) {
          const itemPrice = document.getElementById(id).innerText;
          const itemPriceNum = parseFloat(itemPrice);
-         const totalPrice = phoneBasePrice * totalQuantity;
+         const totalPrice = basePrice * totalQuantity;
          document.getElementById(id).innerText = totalPrice;
          return totalPrice;
          }
 
-      // function for sub-total 
-      function subTotal(id, itemPrice){
+      //function for sub-total plus button
+      function subTotalPlus(id, itemPrice){
          const subAmount = document.getElementById(id).innerText;
          const subAmountNum = parseFloat(subAmount);
-         const totalSubAmount = 59 + itemPrice;
+         const totalSubAmount = subAmountNum + itemPrice;
+         document.getElementById(id).innerText = totalSubAmount;
+         return totalSubAmount;
+      }
+      //function for sub-total minus button
+      function subTotalMinus(id, itemPrice){
+         const subAmount = document.getElementById(id).innerText;
+         const subAmountNum = parseFloat(subAmount);
+         const totalSubAmount = subAmountNum - itemPrice;
          document.getElementById(id).innerText = totalSubAmount;
          return totalSubAmount;
       }
