@@ -88,14 +88,20 @@
       const phoneAddedBtn = document.getElementById('phone-plus-btn');
       phoneAddedBtn.addEventListener('click', function () {
          const phoneTotalQuantity = quantity('phone-quantity', increase);
+<<<<<<< HEAD
          const phonePrice = totalItemPrice('phone-price', phoneBasePrice , phoneTotalQuantity);
          const subAmount = subTotalPlus('sub-total', 1219);  
+=======
+         const phonePrice = totalItemPrice('phone-price', phoneTotalQuantity);
+         const subAmount = subTotal('sub-total', phonePrice);       
+>>>>>>> 6f643f9b3cbe14f72cfebd95166835680f47640c
       });
 
       //phone quantity minus button event handler
       const phoneMinusBtn = document.getElementById('phone-mins-btn');
       phoneMinusBtn.addEventListener('click', function () {
          const phoneTotalQuantity = quantity('phone-quantity', (-1) * increase);
+<<<<<<< HEAD
          const phonePrice = totalItemPrice('phone-price', phoneBasePrice, phoneTotalQuantity);
          const subAmount = subTotalMinus('sub-total', 1219);
       });
@@ -116,6 +122,12 @@
          const subAmountCase = subTotalMinus('sub-total', 59);
       })
 
+=======
+         const phonePrice = totalItemPrice('phone-price', phoneTotalQuantity);
+         const subAmount = subTotal('sub-total', phonePrice);
+      });
+
+>>>>>>> 6f643f9b3cbe14f72cfebd95166835680f47640c
 
       //function for quantity add
       function quantity(id, increase) {
