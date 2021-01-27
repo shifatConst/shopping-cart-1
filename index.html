@@ -87,13 +87,7 @@
       const phoneAddedBtn = document.getElementById('phone-plus-btn');
       phoneAddedBtn.addEventListener('click', function () {
          const phoneTotalQuantity = quantityAdd('phone-quantity');
-
-         const phonePrice = document.getElementById('phone-price').innerText;
-         const phonePriceNum = parseFloat(phonePrice);
-         document.getElementById('phone-price').innerText = phoneBasePrice * phoneTotalQuantity;
-
-
-
+         const phonePrice = totalItemPrice('phone-price', phoneTotalQuantity);
       });
 
 
@@ -104,14 +98,16 @@
          const currentQuantity = quantityNum + 1;
          document.getElementById(id).value = currentQuantity
          return currentQuantity;
-
-         //function for item total price
-      // function totalItemPrice() {
-      //    const phonePrice = document.getElementById('id').innerText;
-      //    const phonePriceNum = parseFloat(phonePrice);
-      //    document.getElementById('id').innerText = phoneBasePrice * phoneTotalQuantity;
-      //    }
       }
+
+      //function for total item price
+      function totalItemPrice(id, totalQuantity) {
+         const itemPrice = document.getElementById(id).innerText;
+         const itemPriceNum = parseFloat(itemPrice);
+         const totalPrice = phoneBasePrice * totalQuantity;
+         document.getElementById(id).innerText = totalPrice;
+         return totalPrice;
+         }
    </script>
 </body>
 
