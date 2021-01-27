@@ -80,20 +80,37 @@
 
    <script>
 
+      const phoneBasePrice = 1219;
+      const caseBasePrice = 59;
+
       //phone quantity add button event handler
       const phoneAddedBtn = document.getElementById('phone-plus-btn');
-      phoneAddedBtn.addEventListener('click', function(){
+      phoneAddedBtn.addEventListener('click', function () {
          const phoneTotalQuantity = quantityAdd('phone-quantity');
+
+         const phonePrice = document.getElementById('phone-price').innerText;
+         const phonePriceNum = parseFloat(phonePrice);
+         document.getElementById('phone-price').innerText = phoneBasePrice * phoneTotalQuantity;
+
 
 
       });
 
 
       //function for quantity add
-      function quantityAdd(id){
+      function quantityAdd(id) {
          const addQuantity = document.getElementById(id).value;
-         quantityNum = parseFloat(addQuantity);
-         document.getElementById(id).value = quantityNum + 1;
+         const quantityNum = parseFloat(addQuantity);
+         const currentQuantity = quantityNum + 1;
+         document.getElementById(id).value = currentQuantity
+         return currentQuantity;
+
+         //function for item total price
+      // function totalItemPrice() {
+      //    const phonePrice = document.getElementById('id').innerText;
+      //    const phonePriceNum = parseFloat(phonePrice);
+      //    document.getElementById('id').innerText = phoneBasePrice * phoneTotalQuantity;
+      //    }
       }
    </script>
 </body>
